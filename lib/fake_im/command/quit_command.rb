@@ -22,7 +22,9 @@ module FakeIM
       end
 
       def execute(actor, subscriber, auth, groups, &publishing)
-        actor.async.terminate
+        raise TypeError unless actor.is_a?(Command::ActorFacade)
+        # actor.async.terminate
+        actor.command_terminate
       end
     end
 

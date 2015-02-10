@@ -6,7 +6,7 @@ require 'celluloid/autostart'
 module FakeIM
   module Server
 
-    class Connection < FakeIM::Command::Actor
+    class Connection < FakeIM::Command::ActorFacade
       include Celluloid::IO
       include Celluloid::Logger
       include Celluloid::Notifications
@@ -76,12 +76,27 @@ module FakeIM
         @socket.close unless socket.closed?
       end
 
-      ##
-      # Command::Actor Implementation
+      ########################################################################
+      # Command::ActorFacade Implementation
       def command_message(message)
         send_message(message)
       end
 
+      def command_subscribe(topic, subscriber)
+        subscribe(topic, subscriber)
+      end
+
+      def command_unsubscribe(subscription)
+        unsubscribe(subscription)
+      end
+
+      def command_publish(topic, message)
+        publish(topic, message)
+      end
+
+      def command_terminate
+        async.terminate
+      end
     end
 
   end

@@ -25,12 +25,12 @@ module FakeIM
 
       def execute(actor, subscriber, auth, groups, &publishing)
         raise FakeIM::Exceptions::AuthenticationError unless auth.logged_in?
-        raise TypeError unless actor.is_a?(Command::Actor)
+        raise TypeError unless actor.is_a?(Command::ActorFacade)
 
         publishing_message = "from '#{auth.current_user}': #{@message}"
         publishing.call(topic, publishing_message) # Don't worry about publish status
                                                    # here. We always want to deliver it.
-        status = actor.publish(topic, publishing_message)
+        status = actor.command_publish(topic, publishing_message)
         if status.empty?
           actor.command_message("WARN: '#{@user}' is not available")
         else

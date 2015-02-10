@@ -22,7 +22,7 @@ module FakeIM
       end
 
       def execute(actor, subscriber, auth, groups, &publishing)
-        raise TypeError unless actor.is_a?(Command::Actor)
+        raise TypeError unless actor.is_a?(Command::ActorFacade)
 
         command_help = BaseCommand.commands.map { |klass| klass.help }.sort.join('')
         help = "Welcome to Fake IM Server. First thing you'll want to do is 'login'\n" + command_help

@@ -31,7 +31,7 @@ module FakeIM
 
       def execute(actor, subscriber, auth, groups, &publishing)
         raise FakeIM::Exceptions::AuthenticationError unless auth.logged_in?
-        raise TypeError unless actor.is_a?(Command::Actor)
+        raise TypeError unless actor.is_a?(Command::ActorFacade)
 
         case @entry1.to_sym
 
@@ -46,7 +46,7 @@ module FakeIM
         when :subscribe
           group = @entry2
           unless groups.has_a?(group)
-            subscription = actor.subscribe(topic(group), subscriber)
+            subscription = actor.command_subscribe(topic(group), subscriber)
             groups.add(group, subscription)
             actor.command_message("Group Subscribe: '#{group}'")
           else
@@ -57,7 +57,7 @@ module FakeIM
           group = @entry2
           if groups.has_a?(group)
             subscription = groups.subscriber(group)
-            actor.unsubscribe(subscription)
+            actor.command_unsubscribe(subscription)
             groups.delete(group)
             actor.command_message("Group Unsubscribe: '#{group}'")
           else
@@ -69,7 +69,7 @@ module FakeIM
           if groups.has_a?(group)
             message = @entry2
             publish_message = "from '#{auth.current_user}' | to '#{group}': #{message}"
-            actor.publish(topic(group), publish_message)
+            actor.command_publish(topic(group), publish_message)
             publishing.call(topic(group), publish_message)
           else
             actor.command_message("WARN: Do not belong to group: '#{group}'")
