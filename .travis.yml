@@ -1,3 +1,4 @@
+script: bundle exec rake
 rvm:
   - jruby-1.7.19
 
