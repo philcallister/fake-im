@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require_relative '../lib/fake_im'
+
+FakeIM::CLI::Server.start

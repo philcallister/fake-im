@@ -1,0 +1,23 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    celluloid (0.16.0)
+      timers (~> 4.0.0)
+    celluloid-io (0.16.2)
+      celluloid (>= 0.16.0)
+      nio4r (>= 1.1.0)
+    hitimes (1.2.2-java)
+    minitest (5.5.1)
+    nio4r (1.1.0-java)
+    rake (10.1.0)
+    timers (4.0.1)
+      hitimes
+
+PLATFORMS
+  java
+
+DEPENDENCIES
+  celluloid
+  celluloid-io
+  minitest
+  rake
