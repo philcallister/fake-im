@@ -37,7 +37,7 @@ rake test
 Start the server
 
 ```bash
-./bin/fake-im-server
+./bin/fake_im_server
 ```
 
 Start a telnet client
