@@ -29,7 +29,7 @@ module FakeIM
         HELP
       end
 
-      def execute(actor, subscriber, auth, groups, &publishing)
+      def execute(actor, subscriber, auth, groups)
         raise FakeIM::Exceptions::AuthenticationError unless auth.logged_in?
         raise TypeError unless actor.is_a?(Command::ActorFacade)
 
@@ -70,7 +70,6 @@ module FakeIM
             message = @entry2
             publish_message = "from '#{auth.current_user}' | to '#{group}': #{message}"
             actor.command_publish(topic(group), publish_message)
-            publishing.call(topic(group), publish_message)
           else
             actor.command_message("WARN: Do not belong to group: '#{group}'")
           end

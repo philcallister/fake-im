@@ -21,7 +21,7 @@ module FakeIM
         HELP
       end
 
-      def execute(actor, subscriber, auth, groups, &publishing)
+      def execute(actor, subscriber, auth, groups)
         raise TypeError unless actor.is_a?(Command::ActorFacade)
         actor.command_terminate
       end

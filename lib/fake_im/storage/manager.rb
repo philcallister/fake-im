@@ -14,7 +14,7 @@ module FakeIM
       def initialize(storage_plugin)
         info "+++ Storage Manager: Starting with: #{storage_plugin}"
         Celluloid::Actor[:storage] = Actor.current
-        @storage = FakeIM::Storage::Factory.create_storage(storage_plugin)
+        @storage = FakeIM::Storage::Strategy.create_storage(storage_plugin)
       end
 
       def shutdown

@@ -47,7 +47,7 @@ module FakeIM
 
       ##
       # Execute the given command object
-      def execute(actor, subscriber, auth, groups, &publishing)
+      def execute(actor, subscriber, auth, groups)
       	raise NotImplementedError
       end
     end

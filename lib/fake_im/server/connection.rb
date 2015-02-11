@@ -35,15 +35,14 @@ module FakeIM
       # BaseCommand factory builder. Once the appropriate command has been built,
       # the command is executed.
       def reader
+        send_message("Welcome to FakeIM Server. Enter 'help' to see commands.")
         loop do
           info "*** Connection: Waiting to read next message from #{format_addr(@socket)}"
           payload = @socket.readpartial(4096).chomp
           info "*** Connection: Command: '#{payload}' from #{format_addr(@socket)}"
           begin
             command = FakeIM::Command::BaseCommand.build_command(payload)
-            command.execute(Celluloid::Actor.current, :receive_message, @auth, @groups) do |topic, message|
-              Celluloid::Actor[:storage].async.store_message(topic, message)
-            end
+            command.execute(Celluloid::Actor.current, :receive_message, @auth, @groups)
           rescue FakeIM::Exceptions::AuthenticationError
             send_message("ERROR: Not logged in")
           rescue ArgumentError, FakeIM::Exceptions::InvalidCommandError
@@ -91,6 +90,7 @@ module FakeIM
       end
 
       def command_publish(topic, message)
+        Celluloid::Actor[:storage].async.store_message(topic, message)
         publish(topic, message)
       end
 
