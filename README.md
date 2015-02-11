@@ -13,10 +13,14 @@ The sample was developed using the following
 
 ## Setup
 
+Clone Repo
+```bash
+git clone https://github.com/philcallister/fake-im.git
+```
+
 Gem Installation
 
 ```bash
-git clone https://github.com/philcallister/fake-im.git
 gem install bundler
 bundle install --binstubs .bundle/bin --path .bundle/gems
 ```
