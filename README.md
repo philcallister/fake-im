@@ -1,5 +1,6 @@
 # Fake IM
 [![Build Status](https://travis-ci.org/philcallister/fake-im.svg?branch=master)](https://travis-ci.org/philcallister/fake-im)
+[![Code Climate](https://codeclimate.com/github/philcallister/fake-im/badges/gpa.svg)](https://codeclimate.com/github/philcallister/fake-im)
 
 This example, by [Phil Callister](http://github.com/philcallister), is an example client/server application that demonstrates a Ruby
 Instant Messenger. It makes no attempt to follow standards, such as XMPP.
